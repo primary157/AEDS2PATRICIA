@@ -5,17 +5,20 @@
 #else
 #include "Binaria.h"
 #endif
+union Node;
 typedef struct _IntNode{
-	Chave c;
+	Chave c;	//binario ou char
+	unsigned int offset;	//distancia em index
+	Node *lnode, *rnode;	//nos filhos
 } IntNode;
 typedef struct _ExtNode{
-	Chave c;
+	Chave *c;	//Cadeia de bits ou string
 } ExtNode;
-union Node{ IntNode i; ExtNode e;};
-void insertPatricia(Node**,Chave*);
-void searchPatricia(Node*,Chave);
-void disablePatricia(Node**,Chave);
-void printPatricia(Node*);
-void initPatricia(Node**);
+union Node{ IntNode i; ExtNode e;};	//abstração para o ponteiro para Nos
+void insertPatricia(Node**,Chave*);	//Função de Inserção
+void searchPatricia(Node*,Chave*);	//Função de Busca
+void disablePatricia(Node**,Chave*);	//Função para desativar
+void printPatricia(Node*);	//Imprime valores em ordem
+void initPatricia(Node**);	//Inicializa No
 
 #endif
