@@ -18,65 +18,65 @@ void searchPatricia(Node* n, Data d){
 	if(bit(n->NodeInfo.i.position, d) == False) searchPatricia(n->NodeInfo.i.lnode,d);
 	else searchPatricia(n->NodeInfo.i.rnode,d);
 }
-Node ** initInternalNode(unsigned int position, Node * lnode, Node * rnode){
-  Node ** p;
-  p = (Node **)malloc(sizeof(Node));
-  (*p)->nt = Internal;
-  (*p)->NodeInfo.i.lnode = lnode;
-  (*p)->NodeInfo.i.rnode = rnode;
-  (*p)->NodeInfo.i.position = position;
-  return p;
+void initInternalNode(Node** n, unsigned int position, Node* lnode, Node* rnode){
+	  (*n) = (Node *)malloc(sizeof(Node));
+	  (*n)->nt = Internal;
+	  (*n)->NodeInfo.i.lnode = lnode;
+	  (*n)->NodeInfo.i.rnode = rnode;
+	  (*n)->NodeInfo.i.position = position;
 }
 
-Node ** initExternalNode(Data d){
-  Node ** p;
-  p = (Node **)malloc(sizeof(Node));
-  (*p)->nt = External;
-  (*p)->NodeInfo.e = d;
-  return p;
+void initExternalNode(Node **n,Data d){
+	  (*n) = (Node *)malloc(sizeof(Node));
+	  (*n)->nt = External;
+	  (*n)->NodeInfo.e = d;
 }
 
-Node ** insertPatricia(Node ** n, Data d){
-  Node ** p;
-  int i;
-  if(*n == NULL){
-    return (initExternalNode(d));
-  } else {
-      *p = *n;
-      while (!IsExternal(*(*p))) {
-        if(bit((*p)->NodeInfo.i.position, d) == 1)
-          *p = (*p)->NodeInfo.i.rnode;
-        else
-          *p = (*p)->NodeInfo.i.lnode;
-      }
-  }
-  i = 1 ;
-  while ((i <= 8) && (bit(i,d) == bit(i, (*p)->NodeInfo.e))) {
-    i++;
-    if( i > 8){
-      printf("ERRO: CHAVE JÁ ESTÁ NA ARVORE\n");
-      return n;
-    } else {
-      return (_insertPatricia(d, n, i));
-    }
-  }
-  return 0;
+void insertPatricia(Node ** n, Data d){
+	unsigned int i = 1;
+	if(*n == NULL){
+		initExternalNode(n,d);
+		return;
+	} 
+	else {
+		while (!IsExternal(**n)) {
+			if(bit((*n)->NodeInfo.i.position, d) == 1)
+			  insertPatricia(&(*n)->NodeInfo.i.rnode,d);
+			else
+			  insertPatricia(&(*n)->NodeInfo.i.lnode,d);
+		}
+	}
+	while ((i <= 8) && (bit(i,d) == bit(i, (*n)->NodeInfo.e))) {
+		if( ++i > 8){
+			printf("ERRO: CHAVE JÁ ESTÁ NA ARVORE\n");
+			return;
+		} 
+		else {
+			_insertPatricia(d, n, i);
+			return;
+		}
+	}
 }
 
-Node ** _insertPatricia(Data d, Node ** n, int i){
-  Node ** p;
-  if(IsExternal(*(*n)) || (i < (*n)->NodeInfo.i.position)){
-		p = initExternalNode(d);
-		if(bit(i,d) == 1)
-			return (initInternalNode( i , *n,  *p));
-		else
-			return (initInternalNode(i,*p, *n));
+void _insertPatricia(Data d, Node ** n, unsigned int i){
+	Node *n_aux1, *n_aux2;
+	if(IsExternal(*(*n)) || (i < (*n)->NodeInfo.i.position)){
+		initExternalNode(&n_aux1,d);
+		if(bit(i,d) == 1){
+			initInternalNode(&n_aux2, i , *n,  n_aux1);
+			*n = n_aux2;
+			return;
+		}
+		else{
+			initInternalNode(&n_aux2, i , n_aux1, *n);
+			*n = n_aux2;
+			return;
+		}
 	}else{
 		if(bit((*n)->NodeInfo.i.position, d) == 1)
-			(*n)->NodeInfo.i.rnode = _insertPatricia(d, &(*n)->NodeInfo.i.rnode, i);
+			_insertPatricia(d, &(*n)->NodeInfo.i.rnode, i);
 		else
-			(*n)->NodeInfo.i.lnode = _insertPatricia(d, &(*n)->NodeInfo.i.lnode, i);
-		return n;
+			_insertPatricia(d, &(*n)->NodeInfo.i.lnode, i);
+		return;
 	}
-
 }

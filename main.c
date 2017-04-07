@@ -6,21 +6,26 @@ int main(void)
 #ifdef TEXTUAL_MODE
 	Data *c = "Marilene";	//define c e atribui valores a ele
 #else
-	Data c[10];	//define c e atribui valores a ele
-	c[0]=False;
-	c[1]=True;
-	c[2]=False;
-	c[3]=True;
-	c[4]=True;
-	c[5]=False;
-	c[6]=False;
-	c[7]=True;
-	c[8]=False;
-	c[9]=True;
+	unsigned char a = ('a');	//define c e atribui valores a ele
+	Data c[8];
+	c[0]=(a&1);
+	a = a>>1;
+	c[1]=(a&1);
+	a = a>>1;
+	c[2]=(a&1);
+	a = a>>1;
+	c[3]=(a&1);
+	a = a>>1;
+	c[4]=(a&1);
+	a = a>>1;
+	c[5]=(a&1);
+	a = a>>1;
+	c[6]=(a&1);
+	a = a>>1;
+	c[7]=(a&1);
 #endif
-	initPatricia(&no);	//Inicializa No
-	insertPatricia(&no,c);	//Insere Data c
-	searchPatricia(no,c);	//Busca c
+	initExternalNode(&no, c); //Inicializa arvore e insere primero valor
+	searchPatricia(no,a);	//Busca c
 	printPatricia(no);	//printa arvore
 	disablePatricia(&no,c);	//disativa c
 	printPatricia(no);	//printa arvore
