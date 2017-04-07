@@ -4,9 +4,9 @@ int main(void)
 {
 	Node *no;	//define arvore
 #ifdef TEXTUAL_MODE
-	Chave *c = "Marilene";	//define c e atribui valores a ele
+	Data *c = "Marilene";	//define c e atribui valores a ele
 #else
-	Chave c[10];	//define c e atribui valores a ele
+	Data c[10];	//define c e atribui valores a ele
 	c[0]=False;
 	c[1]=True;
 	c[2]=False;
@@ -19,7 +19,7 @@ int main(void)
 	c[9]=True;
 #endif
 	initPatricia(&no);	//Inicializa No
-	insertPatricia(&no,c);	//Insere Chave c
+	insertPatricia(&no,c);	//Insere Data c
 	searchPatricia(no,c);	//Busca c
 	printPatricia(no);	//printa arvore
 	disablePatricia(&no,c);	//disativa c
