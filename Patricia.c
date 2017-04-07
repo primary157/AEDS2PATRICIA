@@ -9,3 +9,8 @@ Boolean bit(unsigned int position, Data x){
 Boolean IsExternal(Node n){
 	return (Boolean)(n.nt == External);
 }
+void searchPatricia(Node* n, Data d){
+	if(IsExternal(*n) == True){
+		if(d == n->NodeInfo.e) printf("Elemento Encontrado\n");
+	}
+}
