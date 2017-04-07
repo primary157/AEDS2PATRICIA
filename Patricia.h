@@ -5,6 +5,7 @@
 #else
 #include "Binaria.h"
 #endif
+typedef enum{False,True} Boolean;
 typedef enum{Internal,External} NodeType;
 typedef struct _Node{
 	NodeType nt;	//Tipo do No
@@ -22,5 +23,6 @@ void searchPatricia(Node*,Data*);	//Função de Busca
 void disablePatricia(Node**,Data*);	//Função para desativar
 void printPatricia(Node*);	//Imprime valores em ordem
 void initPatricia(Node**);	//Inicializa No
+Boolean bit(unsigned int offset, Data x);
 
 #endif
