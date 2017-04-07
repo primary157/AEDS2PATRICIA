@@ -12,7 +12,7 @@ typedef struct _Node{
 	typedef union _NodeInfo{
 		struct {
 			Data c;	//binario ou char
-			unsigned int offset;	//distancia em index
+			unsigned int position;	//distancia em index
 			_Node *lnode, *rnode;	//nos filhos
 		} i;	//No interno
 		Data e;	//No externo
@@ -22,7 +22,9 @@ void insertPatricia(Node**,Data*);	//Função de Inserção
 void searchPatricia(Node*,Data*);	//Função de Busca
 void disablePatricia(Node**,Data*);	//Função para desativar
 void printPatricia(Node*);	//Imprime valores em ordem
-void initPatricia(Node**);	//Inicializa No
-Boolean bit(unsigned int offset, Data x);
+void initInternalNode(Node** n, unsigned int position, Node* lnode, Node* rnode); //Inicializa No Interno
+void initExternalNode(Node** n, Data d);	//Inicializa No Externo e Arvore
+Boolean bit(unsigned int position, Data x);
+Boolean IsExternal(Node n);
 
 #endif
