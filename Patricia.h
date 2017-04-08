@@ -15,7 +15,7 @@ typedef struct _Node{
 		struct {
 			Boolean enabled; //Disableable
 			unsigned int position;	//distancia em index
-			_Node *lnode, *rnode;	//nos filhos
+			struct _Node *lnode, *rnode;	//nos filhos
 		} i;	//No interno
 		Data e;	//No externo
 	} NodeInfo;	//abstração no para os nos internos e externos

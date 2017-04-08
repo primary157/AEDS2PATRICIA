@@ -24,11 +24,11 @@ int main(void)
 	a = a>>1;
 	c[7]=(a&1);
 #endif
-	initExternalNode(&no, c); //Inicializa arvore e insere primero valor
+	insertPatricia(&no, a); //Inicializa arvore e insere primero valor
 	searchPatricia(no,a);	//Busca c
-	printPatricia(no);	//printa arvore
-	disablePatricia(&no,c);	//disativa c
-	printPatricia(no);	//printa arvore
+	//printPatricia(no);	//printa arvore
+	//disablePatricia(&no,c);	//disativa c
+	//printPatricia(no);	//printa arvore
 	
 
 	return 0;
